@@ -17,22 +17,22 @@ int main(void)
     int change = (int) round(amount * 100); 
     // get the amount of quarters
     while (change >= 25) { 
-        change =- 25;
+        change -= 25;
         coins++;
     }
     // get the amount of dimes
     while (change >= 10) { 
-        change =- 10;
+        change -= 10;
         coins++;
     } 
     // nickels...
     while (change >= 5) {
-        change =- 5;
+        change -= 5;
         coins++;
     } 
     // and pennies...
     while (change >= 1) { 
-        change =- 1;
+        change -= 1;
         coins++;
     } 
     // print the amount of coins it took to creat the change

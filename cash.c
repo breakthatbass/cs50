@@ -4,39 +4,37 @@
 
 int main(void)
 {
-    float change;
-    
-    float quarter = 0.25;
-    float dime = 0.1;
-    float nickel = 0.05;
-    float penny = 0.01;
-    
+    float amount;
     int coins = 0; //variable to keep track of each coin used
     
     // make sure the input is a float
      do {
-        change = get_float("Change owed: "); // get the amount of change
-    } while (change < 0);
-    
-    while (change - quarter > 0) { // get the amount of quarters
-        change = change - quarter;
+        amount = get_float("Change owed: "); // get the amount of change
+    } while (amount < 0);
+
+    // convert the float input to an whole number integers
+    // easier to work with
+    int change = (int) round(amount * 100); 
+    // get the amount of quarters
+    while (change >= 25) { 
+        change =- 25;
         coins++;
     }
-    
-    while (change - dime > 0) { // get the amount of dimes
-        change = change - dime;
+    // get the amount of dimes
+    while (change >= 10) { 
+        change =- 10;
         coins++;
     } 
-    
-    while (change - nickel > 0) { // nickels...
-        change = change - nickel;
+    // nickels...
+    while (change >= 5) {
+        change =- 5;
         coins++;
     } 
-    
-    while (change - penny > 0) { // and pennies...
-        change = change - penny;
+    // and pennies...
+    while (change >= 1) { 
+        change =- 1;
         coins++;
     } 
-    
-    printf("%d\n", coins); // print the amount of coins it took
+    // print the amount of coins it took to creat the change
+    printf("%i\n", coins); 
 }

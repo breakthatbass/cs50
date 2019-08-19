@@ -7,7 +7,7 @@
 int main(int argc, string argv[])
 {
     char * plaintext;
-    char * keyword = argv[1];
+    char * keyword = argv[1]; 
     int c;
     
     if (argc != 2){

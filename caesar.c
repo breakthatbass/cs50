@@ -6,21 +6,29 @@
 int main(int argc, string argv[])
 {
     string s;
-    int k = atoi(argv[1]);
+    // argv[] is an array of strings - even if those strings are numbers
+    // atoi() converts those strings to integers
+    int k = atoi(argv[1]) % 26; // store remainder if greater than 26
+
     // check to make sure there are only two arguments
     if (argc == 2 )
     {
         // prompt the user to input a string to be converted
         s = get_string("plaintext:");
+
+        printf("ciphertext: ");
         
         //iterate through each char in string
         for(int i = 0; i < strlen(s); i++)
         {
             // convert each char to an int
-           int c = (int) s[i];
-           // add k to each char and print to terminal
-           printf("ciphertext: %c\n", c + k); // got a bug to fix here!!
+            // add k to each char and print to terminal
+           int c = (int) s[i] + k;
+           
+           printf("ciphertext: %c", c);
         }
+        printf("\n");
+        
         return 0;
     } else
     {

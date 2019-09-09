@@ -27,11 +27,7 @@ int main(int argc, string argv[])
             for(int j = 0; j < strlen(keyword); j++){
              c = (int) (plaintext[i] + keyword[i]) % 26; 
             }
-            //loop through keyword
-            //make keyword an int
-           
-           
-           printf("ciphertext: %c", c);
+           printf("%c", c);
         }
         printf("\n");
         

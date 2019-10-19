@@ -32,7 +32,7 @@ int main(int argc, string argv[])
         return 0;
     } else
     {
-        // unsure why "Usage: " is necessary here but it is what the directions asked for
+        // if you do it wrong 'usage' shows what to do
         printf("Usage: ./caesar key\n");
         return 1;
     }

@@ -4,19 +4,15 @@ from sys import argv
 from string import *
 import sys
 
-# converts the word into ints
-k = atoi(sys.argv[1]) % 26 # currently not working...will do later
+if len(sys.argv) != 2:
+    print("Usage: ./caesar key")
 
-# if there is only one extra command line arg, ...
-if len(sys.argv) == 2:
-    s = get_string("Plaintext:")
-    print("Cyphertext:")
+# converts the word into ints
+key = sys.argv[1] % 26 # currently not working...will do later
+word = get_string("Plaintext:")
+print("Cyphertext:")
 
     #loop through each char in str and add the k ints to it
-    for i in range(len(s)):
-
-        c = s[i] + k
-        print("ciphertext:", c)
-
-else:
-    print("Usage: ./caesar key");
+for i in range(len(word)):
+    c = word[i] + key
+    print(c)

@@ -13,7 +13,8 @@ int main(int argc, string argv[])
         return 1;
     }
     int key = atoi(argv[1]) % 26; // if argv[1] > 26, keep the remainder instead
-    string word = get_string("Plaintext:");
+    string word = get_string("Plaintext: ");
+    printf("Cipehertext: ");
 
     for(int i = 0; i < strlen(word); i++)
     {

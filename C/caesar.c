@@ -20,9 +20,9 @@ int main(int argc, string argv[])
 
         // all of this weird nonsense is required to loop back around to a if the letters go past z
         int fix = isupper(word[i]) ? 65 : 97;
-        int pi = word[i] - fix;
-        int ci = (pi + key) % 26;
-        printf("%c", ci + fix);
+        int a = word[i] - fix;
+        int b = (a + key) % 26;
+        printf("%c", b + fix);
 
     }
     printf("\n");

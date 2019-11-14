@@ -1,41 +1,31 @@
 #include <cs50.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
 
 // main takes two argumaents: an int and a string
 int main(int argc, string argv[])
 {
-    string s;
-    // argv[] is an array of strings - even if those strings are numbers
-    // atoi() converts those strings to integers
-    int k = atoi(argv[1]) % 26; // store remainder if greater than 26
-
-    // check to make sure there are only two arguments
-    if (argc == 2 )
+    if (argc != 2)
     {
-        // prompt the user to input a string to be converted
-        s = get_string("plaintext:");
-
-        printf("ciphertext: ");
-        
-        //iterate through each char in string
-        for(int i = 0; i < strlen(s); i++)
-        {
-            // convert each char to an int
-            // add k to each char and print to terminal
-           int c = (int) s[i] + k;
-           
-           printf("ciphertext: %c", c);
-        }
-        printf("\n");
-        
-        return 0;
-    } else
-    {
-        // if you do it wrong 'usage' shows what to do
         printf("Usage: ./caesar key\n");
         return 1;
     }
-    
+    int key = atoi(argv[1]) % 26; // if argv[1] > 26, keep the remainder instead
+    string word = get_string("Plaintext:");
+
+    for(int i = 0; i < strlen(word); i++)
+    {
+
+        // all of this weird nonsense is required to loop back around to a if the letters go past z
+        int fix = isupper(word[i]) ? 65 : 97;
+        int pi = word[i] - 65;
+        int ci = (pi + key) % 26;
+        printf("%c", ci + 65);
+
+    }
+    printf("\n");
+    return 0;
 }
 

@@ -19,7 +19,9 @@ def main():
 
         # convert strings to unicode numbers
         a = ord(word[i])
+        # do the math out to get correct ints
         b = ((((a - fix) + key) % 26) + fix)
+        # convert back to chars
         c = chr(b)
         print(c, end="")
 

@@ -1,36 +1,54 @@
 #include <cs50.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
 
-// not working yet :(
-
+// main takes two argumaents: an int and a string
 int main(int argc, string argv[])
 {
-    char * plaintext;
-    char * keyword = argv[1]; 
-    int c;
-    
-    if (argc != 2){
-        printf("Usage: ./vigenere keyword\n");
-        return 1;
-    } else
+    if (argc != 2)
     {
-        
-     // prompt the user to input a string to be converted
-        plaintext = get_string("plaintext:");
-
-        printf("ciphertext: ");
-        
-        //iterate through each char in string
-        for(int i = 0; i < strlen(plaintext); i++)
-        {
-            for(int j = 0; j < strlen(keyword); j++){
-             c = (int) (plaintext[i] + keyword[i]) % 26; 
-            }
-           printf("%c", c);
-        }
-        printf("\n");
-        
-        return 0;
+        printf("Usage: ./caesar key\n");
+        return 1;
     }
+    //int key = atoi(argv[1]) % 26; // if argv[1] > 26, keep the remainder instead
+   
+    string keyword = argv[1];
+    string plaintext = get_string("Plaintext: ");
+    printf("Cipehertext: ");
+    int plaintext_length = strlen(plaintext);
+    
+    // create an empty array that is the length of word input
+    int key_arr[plaintext_length];
+    // loop through each char of argv[i]
+    for(int i = 0, j = 0; i < plaintext_length; i++)
+    {
+        // i use a second counter variable here to get reset and start from beginning
+        // of word if it is shorter than the plainttext input
+        
+        if (keyword[i] != '\0')
+        //if (j <= word_length)
+        {
+            
+            int fix = isupper(plaintext[i]) ? 65 : 97;
+            // push each value to the array
+            key_arr[i] = keyword[j]; 
+            
+                if (plaintext[i] == 32) // 32 is ascii code for space
+                {
+                    key_arr[i] = 32; 
+                }   
+            j++;
+        }
+        else // if end of key array is reached, start over
+        {
+            j = 0;
+        }
+        
+        printf("%c", key_arr[i]);
+    }
+    printf("\n");
+
+    return 0;
 }

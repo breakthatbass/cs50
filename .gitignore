@@ -1,1 +1,7 @@
 .vscode
+
+# ignore cs50 c library
+libcs50-10.1.0
+
+#ignore cs50 python library
+python-cs50

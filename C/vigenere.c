@@ -1,11 +1,11 @@
-#include <cs50.h>
+// #include <cs50.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
 
 // main takes two argumaents: an int and a string
-int main(int argc, string argv[])
+int main(int argc, char argv[])
 {
     if (argc != 2)
     {
@@ -14,8 +14,9 @@ int main(int argc, string argv[])
     }
     //int key = atoi(argv[1]) % 26; // if argv[1] > 26, keep the remainder instead
    
-    string keyword = argv[1];
-    string plaintext = get_string("Plaintext: ");
+    char *keyword = argv[1];
+    // string plaintext = get_string("Plaintext: ");
+    char plaintext = "hi hi";
     printf("Cipehertext: ");
     int plaintext_length = strlen(plaintext);
     

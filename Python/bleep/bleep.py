@@ -14,11 +14,10 @@ def main():
 
     banned_words = [] #empty list to append elements from file
     with open(filepath) as fp:
-       cnt = 0
        for line in fp:
            # add each line from file to banned_words list
            banned_words.append(line)
-           cnt += 1
+           
     # prompt user for a message/sentence
     msg = get_string("message: ")
 

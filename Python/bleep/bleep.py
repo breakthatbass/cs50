@@ -43,8 +43,9 @@ def main():
                 split_msg.insert(index_of, new_str)
                 # then remove matched word
                 split_msg.remove(item1)
-                # print out all the elements in the list but concatinate all elements with a space
-                print(" ".join(split_msg))
+                
+    # print out all the elements in the list but concatinate all elements with a space
+    print(" ".join(split_msg))
 
 if __name__ == "__main__":
     main()

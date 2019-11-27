@@ -1,8 +1,11 @@
 import sys
 import os
+from nltk.tokenize import sent_tokenize
 
 def lines(a, b):
     """Return lines in both a and b"""
+
+    # variables for two command line args
     a = sys.argv[2]
     b = sys.argv[3]
 
@@ -11,33 +14,30 @@ def lines(a, b):
        print("usage: ./compare --line file1.ext file2.ext")
        sys.exit(1)
 
+    # lists to seperate each line into elements
     lines1 = []
     lines2 = []
-### try this after as one
+    # list to collect all the matching lines
+    matches = []
+
     with open(a) as fp1:
        for line in fp1:
            # add each line from file to lines1 list
-        lines1.append(line)
+        lines1.append(line.rstrip())
 
     with open(b) as fp2:
        for line in fp2:
            # add each line from file to lines2 list
-        lines2.append(line)
+        lines2.append(line.rstrip())
 
-### TODO
-# iterate through both lines lists and find elements that they both have in common
-# append those to a new list
-# return that list
+    for el1 in lines1:
+        for el2 in lines2:
+            # compare each line
+            if el1 == el2:
+                # if lines match, append to matches list
+                matches.append(el1)
 
-    print("Lines1 list:")
-    print(lines1)
-    print()
-    print("Lines2 list:")
-    print(lines2)
-
-
-    # TODO
-    #return []
+    return matches
 
 
 def sentences(a, b):

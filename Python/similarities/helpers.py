@@ -44,6 +44,10 @@ def sentences(a, b):
     a = sys.argv[2]
     b = sys.argv[3]
 
+    if not os.path.isfile(a or b):
+       print("usage: ./compare --sentences file1.ext file2.ext")
+       sys.exit(1)
+
     # list for matching sentences from files
     matches = []
 
@@ -71,7 +75,73 @@ def sentences(a, b):
 
 
 def substrings(a, b, n):
-    """Return substrings of length n in both a and b"""
+    # arg shortcuts
+    a = sys.argv[3]
+    b = sys.argv[4]
+    n = sys.argv[2] # n is length of substring
 
-    # TODO
-    return []
+    # counting variables
+    i = 0
+    k = 0
+    # convert to int because even though arg is a number, it args come as strings
+    j = int(n)
+
+    # empty lists to append to
+    sub_str1 = []
+    sub_str2 = []
+    matches = []
+
+    # list of things to remove from strings
+    crap = [' ', '!', '?', '.', ',', '"']
+
+    # short cuts for opening and reading files
+    fp1 = open(a).read()
+    fp2 = open(b).read()
+    
+    # loop through files and remove anything that is in crap list
+    for el in crap:
+        fp1 = fp1.replace(el, '')
+    for el in crap:
+        fp2 = fp2.replace(el, '')
+
+    while i < len(fp1):
+        # make sure splice end doesn't go past length of string
+        if j > len(fp1):
+            break
+        else:
+            # splice string starting at index 0 and ending at j which is the int
+            sObject = slice(k, j)
+            # append spliced section fo string
+            sub_str1.append(fp1[sObject])
+            k += 1
+            j += 1
+            i += 1
+
+    # reset variables for next loop
+    # only works as global vars and not within loops
+    # I'm not sure why
+    k = 0
+    j = int(n)
+    i = 0
+
+    while i < len(fp2):
+        if j > len(fp2):
+            break
+        else:
+            sObject = slice(k, j)
+            sub_str2.append(fp2[sObject])
+            k += 1
+            j += 1
+            i += 1
+
+    # iterate through both list and appened matching els to new list
+    for el1 in sub_str1:
+        for el2 in sub_str2:
+            if el1 == el2:
+                matches.append(el1)
+
+    # remove any duplicates from matches list
+    matches = list(dict.fromkeys(matches))
+
+    return matches
+

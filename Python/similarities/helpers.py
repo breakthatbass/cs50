@@ -1,10 +1,7 @@
 import sys
 import os
 from nltk.tokenize import sent_tokenize
-# reusABLE variables for two command line args
 
-a = sys.argv[2]
-b = sys.argv[3]
 
 def lines(a, b):
     a = sys.argv[2]

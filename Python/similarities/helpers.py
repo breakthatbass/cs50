@@ -1,13 +1,15 @@
 import sys
 import os
 from nltk.tokenize import sent_tokenize
+# reusABLE variables for two command line args
+
+a = sys.argv[2]
+b = sys.argv[3]
 
 def lines(a, b):
-    """Return lines in both a and b"""
-
-    # variables for two command line args
     a = sys.argv[2]
     b = sys.argv[3]
+    """Return lines in both a and b"""
 
 
     if not os.path.isfile(a or b):
@@ -42,9 +44,33 @@ def lines(a, b):
 
 def sentences(a, b):
     """Return sentences in both a and b"""
+    a = sys.argv[2]
+    b = sys.argv[3]
 
-    # TODO
-    return []
+    # list for matching sentences from files
+    matches = []
+
+    # open file of first command line arg
+    fp1 = open(a).read()
+    #seperate it into seperate sentences
+    token1 = sent_tokenize(fp1)
+    
+    # open file of second command line arg
+    fp2 = open(b).read()
+    token2 = sent_tokenize(fp2)
+
+    # iterate through both files
+    for i in token1:
+        for j in token2:
+            # if sentences match, append to matches list
+            if i == j:
+                matches.append(i)
+
+    if len(matches) == 0:
+        print("there were no matches.")
+    else:
+        return matches
+
 
 
 def substrings(a, b, n):

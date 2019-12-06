@@ -9,7 +9,6 @@ app = Flask(__name__)
 # Reload templates when they are changed
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
-
 @app.after_request
 def after_request(response):
     """Disable caching"""
@@ -38,13 +37,15 @@ def post_form():
     writer.writerow((request.form.get("name"), request.form.get("food"), request.form.get("holiday")))
     file.close()
     #return render_template("layout.html")
+    return redirect("/sheet")
 
 
 @app.route("/sheet", methods=["GET"])
 def get_sheet():
     file = open("survey.csv", "r")
     reader = csv.reader(file)
-    holidays = list(reader)
-    return render_template("table.html", holidays=holidays)
+    infos = list(reader)
+    
+    return render_template("table.html", infos=infos)
 
     

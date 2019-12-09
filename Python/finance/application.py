@@ -130,13 +130,13 @@ def register():
 
         # make sure a username was submitted
         if not request.form.get("username"):
-            return apology("Must provide username")
+            return apology("Must provide username", 400)
         # make sure a password was submitted
         elif not request.form.get("password"):
-            return apology("Must provide password")
+            return apology("Must provide password", 400)
         # make sure password and confirmation match
-        elif not request.form.get("username") == request.form.get("password"):
-            return apology("Passwords must match")
+        elif not request.form.get("password") == request.form.get("confirmation"):
+            return apology("Passwords must match", 400)
         # hash password
         hash = generate_password_hash(request.form.get("password"))
         # add new user to database
@@ -150,7 +150,7 @@ def register():
         session["user_id"] = new_user
 
         # Redirect user to home page
-        return redirect(url_for("index", filename="index.html"))
+        return redirect(url_for("index"))
 
     else:
         return render_template("register.html") 

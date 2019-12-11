@@ -64,7 +64,7 @@ def buy():
 
     
     """Buy shares of stock"""
-    return apology("TODO")
+    #return apology("TODO")
 
 
 @app.route("/check", methods=["GET"])

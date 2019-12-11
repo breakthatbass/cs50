@@ -60,6 +60,8 @@ def buy():
         if shares < 0:
             return apology("Enter a positive amount of shares")
 
+        print(symbol['price'])
+
     
     """Buy shares of stock"""
     return apology("TODO")

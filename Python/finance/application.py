@@ -15,6 +15,9 @@ app = Flask(__name__)
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
+# global var for functions to use SQL() function - from cs50 lib
+db = SQL("sqlite:///finance.db")
+
 # Ensure responses aren't cached
 @app.after_request
 def after_request(response):
@@ -52,19 +55,42 @@ def index():
 def buy():
 
     if request.method == "POST":
+        # get stock data
         symbol = lookup(request.form.get("symbol"))
+        # variable for the number of shares user wants
         shares = request.form.get("shares")
+        # get user's amount of money listed on databse
+        user = db.execute("SELECT cash FROM users WHERE id = :user_id", user_id=session["user_id"])
 
         if symbol == '' or symbol == False:
             return apology("Enter a valid symbol")
-        if shares < 0:
+        if float(shares) < 0:
             return apology("Enter a positive amount of shares")
 
-        print(symbol['price'])
+        # money user has
+        cash = user[0]['cash']
+        price_per_share = symbol['price']
+        total_cost = price_per_share * float(shares)
 
+        if total_cost > cash:
+            return apology("Not enough money to buy")
+
+        db.execute("UPDATE users SET cash = cash - :price WHERE id = :user_id", price=total_cost, user_id=session["user_id"])
+
+
+        db.execute("INSERT INTO transactions (user_id, symbol, shares, price_per_share) VALUES(:user_id, :symbol, :shares, :price)",
+                   user_id=session["user_id"],
+                   symbol=request.form.get("symbol"),
+                   shares=shares,
+                   price=price_per_share)
+
+        flash("Success!")
+
+        return redirect(url_for("index"))
     
-    """Buy shares of stock"""
-    #return apology("TODO")
+    else:
+        return render_template("buy.html")
+
 
 
 @app.route("/check", methods=["GET"])

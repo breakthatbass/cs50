@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+
+<p>{{ user.username }}'s Portfolio</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Stocks</th>
+            <th scope="col">Shares</th>
+            <th scope="col">Price per Share</th>
+            <th scope="col">Total Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for stock in stocks %}
+            <tr>    
+                <td>{{ stock.symbol.upper() }}</td>
+            </tr>
+        {% endfor %}
+        
+
+    </tbody>
+</table>
+
+    <p>{{ user }}</p>
+    
+
+{% endblock %}

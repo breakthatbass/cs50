@@ -47,7 +47,22 @@ if not os.environ.get("API_KEY"):
 @login_required
 def index():
     """Show portfolio of stocks"""
-    return apology("TODO")
+
+    # create variables for each element needed in db
+    user = db.execute("SELECT username FROM users WHERE id = :user_id", user_id=session["user_id"])
+    stock_data = db.execute("SELECT symbol FROM transactions WHERE user_id = :user_id", user_id=session["user_id"])
+    share_data = db.execute("SELECT shares FROM transactions WHERE user_id = :user_id", user_id=session["user_id"])
+    #symbols = # to plug into lookup
+    #price_per_share = lookup()
+    #current_balance = 
+    #grand_total = #total values + current_balance
+
+
+
+    # use the lookup() function to get current stock prices
+
+    # plug these variables into the html table
+    return render_template("index.html", stocks=stock_data, shares=share_data, user=user)
 
 
 @app.route("/buy", methods=["GET", "POST"])

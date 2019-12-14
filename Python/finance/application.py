@@ -59,6 +59,7 @@ def index():
 
 
 
+
     # use the lookup() function to get current stock prices
 
     # plug these variables into the html table

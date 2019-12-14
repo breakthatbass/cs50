@@ -18,17 +18,23 @@
         </tr>
     </thead>
     <tbody>
-        {% for stock in stocks %}
-            <tr>    
-                <td>{{ stock.symbol.upper() }}</td>
-            </tr>
+         
+        {% for stock in stocks %}  
+        <tr>
+            <td>{{ stock.symbol.upper() }}</td>
+        </tr>
         {% endfor %}
+
+        {% for share in shares %}
+        <tr>
+            <td>{{ share.shares }}</td>
+        </tr>
+        {% endfor %}
+        
+
         
 
     </tbody>
 </table>
-
-    <p>{{ user }}</p>
-    
 
 {% endblock %}

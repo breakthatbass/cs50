@@ -71,7 +71,7 @@ def index():
 
     total = cash;
     for i in range(0, stock_length):
-        total = total + (stock_data[i].shares * prices[stock_data[i]['symbol']]['price'])
+        total = total + (stock_data[i]['shares'] * prices[stock_data[i]['symbol']]['price'])
 
     return render_template("index.html", stocks=stock_data, user=username, cash=cash, length=stock_length, prices=prices, total=total)
 

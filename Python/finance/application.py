@@ -49,21 +49,31 @@ def index():
     """Show portfolio of stocks"""
 
     # create variables for each element needed in db
-    user = db.execute("SELECT username FROM users WHERE id = :user_id", user_id=session["user_id"])
-    stock_data = db.execute("SELECT symbol FROM transactions WHERE user_id = :user_id", user_id=session["user_id"])
-    share_data = db.execute("SELECT shares FROM transactions WHERE user_id = :user_id", user_id=session["user_id"])
+    username = db.execute("SELECT username FROM users WHERE id = :user_id", user_id=session["user_id"])
+    stock_data = db.execute("SELECT symbol, shares FROM transactions WHERE user_id = :user_id", user_id=session["user_id"])
+    user = db.execute("SELECT cash FROM users WHERE id = :user_id", user_id=session["user_id"])
+    #share_data = db.execute("SELECT shares FROM transactions WHERE user_id = :user_id", user_id=session["user_id"])
     #symbols = # to plug into lookup
     #price_per_share = lookup()
     #current_balance = 
     #grand_total = #total values + current_balance
+    username = username[0]['username']
+    cash = user[0]['cash']
+    stock_length = len(stock_data) # for use in the for loop in hte HTML
 
+    prices = {}
 
-
-
+    for el in stock_data:
+        prices[el["symbol"]] = lookup(el["symbol"])
     # use the lookup() function to get current stock prices
 
     # plug these variables into the html table
-    return render_template("index.html", stocks=stock_data, shares=share_data, user=user)
+
+    total = cash;
+    for i in range(0, stock_length):
+        total = total + (stock_data[i].shares * prices[stock_data[i]['symbol']]['price'])
+
+    return render_template("index.html", stocks=stock_data, user=username, cash=cash, length=stock_length, prices=prices, total=total)
 
 
 @app.route("/buy", methods=["GET", "POST"])

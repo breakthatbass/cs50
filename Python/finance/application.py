@@ -230,19 +230,19 @@ def register():
 @login_required
 def sell():
 
+    stock_data = db.execute("SELECT symbol, shares FROM transactions WHERE user_id = :user_id", user_id=session["user_id"])
+    stock_length = len(stock_data) # for use in the loop in the HTML
+    #symbol = lookup(request.form.get("symbol"))
+    #stock_pick = request.form.get("symbol")
+        #share_amount = request.form.get("shares")
+    actual_stock_amount  = db.execute("SELECT SUM(shares) as total_shares FROM transactions WHERE user_id = :user_id AND symbol = :symbol GROUP BY symbol",
+                           user_id=session["user_id"], symbol=request.form.get("symbol"))
+
     if request.method == "POST":
         """Sell shares of stock"""
         #username = db.execute("SELECT username FROM users WHERE id = :user_id", user_id=session["user_id"])
-        stock_data = db.execute("SELECT symbol, shares FROM transactions WHERE user_id = :user_id", user_id=session["user_id"])
+        
         #user = db.execute("SELECT cash FROM users WHERE id = :user_id", user_id=session["user_id"])
-
-        stock_length = len(stock_data) # for use in the loop in the HTML
-
-        #symbol = lookup(request.form.get("symbol"))
-        stock_pick = request.form.get("symbol")
-        #share_amount = request.form.get("shares")
-#
-        actual_stock_amount = db.execute("SELECT shares FROM transactions WHERE symbol = :symbol", symbol=stock_pick)
 
 
         #cash = user[0]['cash']

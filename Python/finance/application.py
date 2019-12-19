@@ -62,7 +62,7 @@ def index():
     for el in stock_data:
         prices[el["symbol"]] = lookup(el["symbol"])
   
-    total = cash;
+    total = cash
     for i in range(0, stock_length):
         total = total + (stock_data[i]['shares'] * prices[stock_data[i]['symbol']]['price'])
 
@@ -219,7 +219,7 @@ def register():
         session["user_id"] = new_user
 
         # Redirect user to home page
-        return redirect(url_for("index"))
+        return render_template("index.html")
 
     else:
         return render_template("register.html") 

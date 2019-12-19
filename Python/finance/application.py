@@ -99,7 +99,7 @@ def buy():
 
         db.execute("INSERT INTO transactions (user_id, symbol, shares, price) VALUES(:user_id, :symbol, :shares, :price)",
                    user_id=session["user_id"],
-                   symbol=request.form.get("symbol"),
+                   symbol=request.form.get("symbol").upper(),
                    shares=shares,
                    price=price_per_share)
 
@@ -234,7 +234,7 @@ def sell():
     stock_length = len(stock_data) # for use in the loop in the HTML
     #symbol = lookup(request.form.get("symbol"))
     #stock_pick = request.form.get("symbol")
-        #share_amount = request.form.get("shares")
+    #share_amount = request.form.get("shares")
     actual_stock_amount  = db.execute("SELECT SUM(shares) as total_shares FROM transactions WHERE user_id = :user_id AND symbol = :symbol GROUP BY symbol",
                            user_id=session["user_id"], symbol=request.form.get("symbol"))
 

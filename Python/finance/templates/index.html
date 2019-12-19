@@ -25,8 +25,8 @@
         <tr>
             <td>{{ stocks[i].symbol.upper() }}</td>
             <td>{{ stocks[i].shares }}</td>
-            <td>${{ prices[stocks[i]['symbol']]['price'] }}</td>
-            <td>${{ prices[stocks[i]['symbol']]['price'] * stocks[i].shares }}</td>
+            <td>{{ prices[stocks[i]['symbol']]['price'] | usd }}</td>
+            <td>{{ (prices[stocks[i]['symbol']]['price'] * stocks[i].shares) | usd }}</td>
         </tr>
     {% endfor %}
     </tbody>

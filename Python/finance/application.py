@@ -105,7 +105,7 @@ def buy():
 
         flash("Success!")
 
-        return redirect(url_for("index"))
+        return render_template("index.html")
     
     else:
         return render_template("buy.html")
@@ -229,8 +229,55 @@ def register():
 @app.route("/sell", methods=["GET", "POST"])
 @login_required
 def sell():
-    """Sell shares of stock"""
-    return apology("TODO")
+
+    if request.method == "POST":
+        """Sell shares of stock"""
+        #username = db.execute("SELECT username FROM users WHERE id = :user_id", user_id=session["user_id"])
+        stock_data = db.execute("SELECT symbol, shares FROM transactions WHERE user_id = :user_id", user_id=session["user_id"])
+        #user = db.execute("SELECT cash FROM users WHERE id = :user_id", user_id=session["user_id"])
+
+        stock_length = len(stock_data) # for use in the loop in the HTML
+
+        #symbol = lookup(request.form.get("symbol"))
+        stock_pick = request.form.get("symbol")
+        #share_amount = request.form.get("shares")
+#
+        actual_stock_amount = db.execute("SELECT shares FROM transactions WHERE symbol = :symbol", symbol=stock_pick)
+
+
+        #cash = user[0]['cash']
+        #price_per_share = symbol['price']
+        #total_cost = price_per_share * float(shares)
+    return render_template("sell.html", stocks=stock_data, length=stock_length, amount=actual_stock_amount)
+        
+"""
+        if share_amount > actual_stock_amount:
+            return apology("You don't own that many shares")
+        
+        money_owed = price_per_share * share_amount
+
+        # variables to be used to update db
+        shares = actual_stock_amount - share_amount
+        new_money = cash + money_owed
+
+        db.execute("UPDATE users SET cash = new_money WHERE id = :user_id", new_money=new_money, user_id=session["user_id"])
+        db.execute("UPDATE transactions SET shares = shares WHERE user_id = :user_id AND symbol = :symbol", shares=shares, symbol=stock_pick, new_money=new_money, user_id=session["user_id"])
+
+
+        flash("Success!")
+
+    #return render_template("index.html")
+    """
+
+
+        # take stock input
+        # take share input and check to see if user owns that number of shares
+        # if yes, update database
+            # get stock prices, multiply it by number of shares
+            # tka that number and add it to total cash
+            # if shares of any stock == 0, then delete that stock from database
+
+    
 
 
 def errorhandler(e):

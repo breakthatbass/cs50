@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sell Stocks
+{% endblock %}
+
+{% block main %}
+
+<p>{{ stocks }}</p>
+<h1>{{ amount }}</h1>
+
+<h1>Sell Stock</h1>
+<br>
+<form action="/sell" method="POST">
+    <div class="form-group">
+
+        <select class="form-control" name="symbol">
+            {% for i in range(0,length) %}
+                <option value="{{ stocks[i].symbol.upper() }}">{{ stocks[i].symbol.upper() }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <br>
+        <input autocomplete="off" autofocus class="form-control" name="shares" placeholder="Number of Shares" type="text">
+    
+    </div>
+
+    <button class="btn btn-primary" type="submit">Sell</button>
+</form>
+
+
+{% endblock %}

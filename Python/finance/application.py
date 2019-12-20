@@ -77,9 +77,12 @@ def buy():
         # get stock data
         symbol = lookup(request.form.get("symbol"))
         # variable for the number of shares user wants
-        shares = request.form.get("shares")
+        shares = int(request.form.get("shares"))
         # get user's amount of money listed on databse
         user = db.execute("SELECT cash FROM users WHERE id = :user_id", user_id=session["user_id"])
+
+        # stocks is used to check if user already own shares of stock
+        stocks = db.execute("SELECT shares FROM transactions WHERE user_id = :user_id AND symbol = :symbol", user_id=session["user_id"], symbol=symbol["symbol"])
 
         if symbol == '' or symbol == False:
             return apology("Enter a valid symbol")
@@ -94,15 +97,32 @@ def buy():
         if total_cost > cash:
             return apology("Not enough money to buy")
 
+        # update cash
         db.execute("UPDATE users SET cash = cash - :price WHERE id = :user_id", price=total_cost, user_id=session["user_id"])
 
 
-        db.execute("INSERT INTO transactions (user_id, symbol, shares, price) VALUES(:user_id, :symbol, :shares, :price)",
+        if not stocks:
+            # update transactions table in db
+            db.execute("INSERT INTO transactions (user_id, symbol, shares, price) VALUES(:user_id, :symbol, :shares, :price)",
                    user_id=session["user_id"],
                    symbol=request.form.get("symbol").upper(),
                    shares=shares,
                    price=price_per_share)
+        else:
+            shares_total = stocks[0]["shares"] + shares
+            db.execute("UPDATE transactions SET shares=:shares \
+                        WHERE user_id=:user_id AND symbol=:symbol", \
+                        shares=shares_total, user_id=session["user_id"], \
+                        symbol=symbol["symbol"])
 
+        # update histories table
+        db.execute("INSERT INTO histories (user_id, action, symbol, shares, price) VALUES(:user_id, :action, :symbol, :shares, :price)",
+                    user_id=session["user_id"],
+                    action="Bought",
+                    symbol=request.form.get("symbol").upper(),
+                    shares=shares,
+                    price=price_per_share)
+    
         flash("Success!")
 
         return redirect("/")
@@ -253,6 +273,14 @@ def sell():
                     purchase=stock["price"] * float(shares))
         # update share amounts
         new_share_amount = actual_stock_amount[0]["total_shares"] - shares
+
+        # update histories table
+        db.execute("INSERT INTO histories (user_id, action, symbol, shares, price) VALUES(:user_id, :action, :symbol, :shares, :price)",
+                    user_id=session["user_id"],
+                    action="Sold",
+                    symbol=request.form.get("symbol").upper(),
+                    shares=shares,
+                    price=stock["price"])
         
         # all all shares of a stock are sold, delete that info from db
         if new_share_amount == 0:

@@ -23,8 +23,8 @@ db = SQL("sqlite:///finance.db")
 # for use in adding date and time to db for buying and selling functions
 # for some reason this function returns time with +5 hours so I have to subtract 5 hours from it
 time = datetime.datetime.utcnow()-datetime.timedelta(hours=5)
-current_time = time.strftime("%H:%M") # get current into readable format
-date = date.today().strftime("%b %d %Y")
+current_time = time.strftime("%H:%M") # get current time into readable format
+date = date.today().strftime("%b %d %Y") 
 
 # Ensure responses aren't cached
 @app.after_request
@@ -152,8 +152,11 @@ def check():
 @app.route("/history")
 @login_required
 def history():
-    """Show history of transactions"""
-    return apology("TODO")
+    hist = db.execute("SELECT * FROM hist WHERE user_id = :user_id", user_id=session["user_id"])
+    username = db.execute("SELECT username FROM users WHERE id = :user_id", user_id=session["user_id"])
+    length = len(hist)
+    user = username[0]['username']
+    return render_template("history.html", length=length, hist=hist, user=user)
 
 
 @app.route("/login", methods=["GET", "POST"])

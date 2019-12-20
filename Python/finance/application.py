@@ -1,4 +1,5 @@
 import os
+import datetime
 
 from cs50 import SQL
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
@@ -6,6 +7,7 @@ from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
+from datetime import date
 
 from helpers import apology, login_required, lookup, usd
 
@@ -17,6 +19,12 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 # global var for functions to use SQL() function - from cs50 lib
 db = SQL("sqlite:///finance.db")
+
+# for use in adding date and time to db for buying and selling functions
+# for some reason this function returns time with +5 hours so I have to subtract 5 hours from it
+time = datetime.datetime.utcnow()-datetime.timedelta(hours=5)
+current_time = time.strftime("%H:%M") # get current into readable format
+date = date.today().strftime("%b %d %Y")
 
 # Ensure responses aren't cached
 @app.after_request
@@ -116,13 +124,15 @@ def buy():
                         shares=shares_total, user_id=session["user_id"], \
                         symbol=symbol["symbol"])
 
-        # update histories table
-        db.execute("INSERT INTO histories (user_id, action, symbol, shares, price) VALUES(:user_id, :action, :symbol, :shares, :price)",
+        # update history table
+        db.execute("INSERT INTO hist (user_id, action, symbol, shares, price, time, date) VALUES(:user_id, :action, :symbol, :shares, :price, :time, :date)",
                     user_id=session["user_id"],
                     action="Bought",
                     symbol=request.form.get("symbol").upper(),
                     shares=shares,
-                    price=price_per_share)
+                    price=price_per_share,
+                    time=current_time,
+                    date=date)
     
         flash("Success!")
 
@@ -240,7 +250,7 @@ def register():
         session["user_id"] = new_user
 
         # Redirect user to home page
-        return render_template("index.html")
+        return redirect("/")
 
     else:
         return render_template("register.html") 
@@ -276,12 +286,14 @@ def sell():
         new_share_amount = actual_stock_amount[0]["total_shares"] - shares
 
         # update histories table
-        db.execute("INSERT INTO histories (user_id, action, symbol, shares, price) VALUES(:user_id, :action, :symbol, :shares, :price)",
+        db.execute("INSERT INTO hist (user_id, action, symbol, shares, price, time, date) VALUES(:user_id, :action, :symbol, :shares, :price, :time, :date)",
                     user_id=session["user_id"],
                     action="Sold",
                     symbol=request.form.get("symbol").upper(),
                     shares=shares,
-                    price=stock["price"])
+                    price=stock["price"],
+                    time=current_time,
+                    date=date)
         
         # all all shares of a stock are sold, delete that info from db
         if new_share_amount == 0:

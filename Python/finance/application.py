@@ -102,13 +102,14 @@ def buy():
 
 
         if not stocks:
-            # update transactions table in db
+            # add new row in db if user doesn't already own shares of stock
             db.execute("INSERT INTO transactions (user_id, symbol, shares, price) VALUES(:user_id, :symbol, :shares, :price)",
                    user_id=session["user_id"],
                    symbol=request.form.get("symbol").upper(),
                    shares=shares,
                    price=price_per_share)
         else:
+            # otherwise, just add to existing shares in that stock's row
             shares_total = stocks[0]["shares"] + shares
             db.execute("UPDATE transactions SET shares=:shares \
                         WHERE user_id=:user_id AND symbol=:symbol", \

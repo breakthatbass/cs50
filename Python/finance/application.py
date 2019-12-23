@@ -55,6 +55,7 @@ if not os.environ.get("API_KEY"):
 @login_required
 def index():
     """Show portfolio of stocks"""
+    users = db.execute("SELECT username FROM users")
 
     # create variables for each element needed in db
     username = db.execute("SELECT username FROM users WHERE id = :user_id", user_id=session["user_id"])
@@ -74,7 +75,7 @@ def index():
     for i in range(0, stock_length):
         total = total + (stock_data[i]['shares'] * prices[stock_data[i]['symbol']]['price'])
 
-    return render_template("index.html", stocks=stock_data, user=username, cash=cash, length=stock_length, prices=prices, total=total)
+    return render_template("index.html", stocks=stock_data, user=username, cash=cash, length=stock_length, prices=prices, total=total, users=users)
 
 
 @app.route("/buy", methods=["GET", "POST"])
@@ -140,14 +141,6 @@ def buy():
     
     else:
         return render_template("buy.html")
-
-
-
-@app.route("/check", methods=["GET"])
-def check():
-    """Return true if username available, else false, in JSON format"""
-    return jsonify("TODO")
-
 
 @app.route("/history")
 @login_required

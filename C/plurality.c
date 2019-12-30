@@ -80,7 +80,15 @@ bool vote(string name)
 // Print the winner (or winners) of the election
 void print_winner(void)
 {
-    
-    return;
+    // merge sort to find largest number
+    for(int i = 1; i < candidate_count; i++)
+    {
+        if(candidates[0].votes < candidates[i].votes)
+        {
+            candidates[0].votes = candidates[i].votes;
+        }
+        printf("%s wins\n", candidates[0].name);
+        break;
+    }
 }
 

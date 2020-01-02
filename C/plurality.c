@@ -80,5 +80,46 @@ bool vote(string name)
 // Print the winner (or winners) of the election
 void print_winner(void)
 { 
-   
+    // array to store all the numbers of votes
+    int votes_arr[candidate_count], index_num; 
+    int double_num = 0;
+    string win_one, win_two;
+    // loop through votes array and add each element to the votes_array
+    for (int i = 0; i < candidate_count; i++)
+    {
+        votes_arr[i] = candidates[i].votes;
+    }
+
+    // now loop through again to find any doubles
+    for (int i = 0; i < candidate_count; i++)
+    {
+        for (int j = i + 1; j < candidate_count; j++)
+        {
+            if (candidates[i].votes == candidates[j].votes)
+            {
+                double_num = candidates[i].votes;
+                win_one = candidates[i].name;
+                win_two = candidates[j].name;
+            }
+        }
+    }
+    //now loop through the votes_arr to find the largest number
+    for (int i = 1; i < candidate_count; i++)
+    {
+        if (votes_arr[0] < votes_arr[i])
+        {
+            votes_arr[0] = votes_arr[i];
+            // store the index number to late extract name associated with that number of votes
+            index_num = i;
+        }
+    }
+
+    if (double_num == 0)
+        {
+            printf("%s wins!\n", candidates[index_num].name);
+        }
+    else
+    {
+        printf("%s and %s win!\n", win_one, win_two);
+    } 
 }

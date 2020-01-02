@@ -80,9 +80,11 @@ bool vote(string name)
 // Print the winner (or winners) of the election
 void print_winner(void)
 { 
-    // array to store all the numbers of votes
+    // array to store all the numbers of votes then an int to store the index to extract the name
     int votes_arr[candidate_count], index_num; 
+    // int to store the number of votes if any candidates share the amount of votes
     int double_num = 0;
+    // string variables to store the names of tie winners if their votes are higher than other votes
     string win_one, win_two;
     // loop through votes array and add each element to the votes_array
     for (int i = 0; i < candidate_count; i++)
@@ -114,7 +116,9 @@ void print_winner(void)
         }
     }
 
-    if (double_num == 0)
+    if (double_num == 0 || double_num < votes_arr[0])
+    // if there are no people who share vote numbers 
+    // or their vote numbers are less than the highest number
         {
             printf("%s wins!\n", candidates[index_num].name);
         }

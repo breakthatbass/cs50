@@ -198,7 +198,7 @@ int find_min(void)
         if (min > candidates[i].votes)
         {
             min = candidates[i].votes;
-            printf("%s eliminated status is set to %i \nwith %i votes and min = %i\n", candidates[i].name, candidates[i].eliminated, candidates[i].votes, min);
+            //printf("%s eliminated status is set to %i \nwith %i votes and min = %i\n", candidates[i].name, candidates[i].eliminated, candidates[i].votes, min);
         }
     }
     return min;
@@ -219,15 +219,16 @@ bool is_tie(int min)
     // loop through votes array and if they are all indentical, return true
     for(int i = 0; i < votes_size; i++)
     {
-        if (check_votes[0] == check_votes[i])
+        if (check_votes[0] != check_votes[i])
         {
-            return true;
+           break;
         }
         else
         {
-            return false;
+            return true;
         }
     }
+    return false;
 }
 
 // Eliminate the candidate (or candidiates) in last place

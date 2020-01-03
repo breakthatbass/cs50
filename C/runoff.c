@@ -185,27 +185,59 @@ bool print_winner(void)
         }
     }
     // otherwise there is no winner
-    printf("there is no winner\n");
     return false;
 }
 
 // Return the minimum number of votes any remaining candidate has
 int find_min(void)
 {
-    // TODO
-    return 0;
+    // find lowest votes of elimimnated == true ncandidates
+    int min = candidates[0].votes;
+    for(int i = 0; i < candidate_count; i++)
+    {
+        if (min > candidates[i].votes)
+        {
+            min = candidates[i].votes;
+            printf("%s eliminated status is set to %i \nwith %i votes and min = %i\n", candidates[i].name, candidates[i].eliminated, candidates[i].votes, min);
+        }
+    }
+    return min;
 }
 
 // Return true if the election is tied between all candidates, false otherwise
 bool is_tie(int min)
 {
-    // TODO
-    return false;
+    int check_votes[candidate_count];
+    for(int i = 0; i < candidate_count; i++)
+    {
+        if (candidates[i].eliminated)
+        {
+            check_votes[i] = candidates[i].votes;
+        }
+    }
+    int votes_size = sizeof(check_votes) / sizeof(check_votes[0]);
+    // loop through votes array and if they are all indentical, return true
+    for(int i = 0; i < votes_size; i++)
+    {
+        if (check_votes[0] == check_votes[i])
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
 
 // Eliminate the candidate (or candidiates) in last place
 void eliminate(int min)
 {
-    // TODO
-    return;
+    for(int i = 0; i < candidate_count; i++)
+    {
+        if (candidates[i].votes == min)
+        {
+            candidates[i].eliminated = true;
+        }
+    }
 }

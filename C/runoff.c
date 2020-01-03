@@ -158,13 +158,34 @@ void tabulate(void)
         candidates[voters_choice].votes++;
         count = 0;
     }
-    printf("%s has %i votes\n", candidates[0].name, candidates[0].votes);
 }
 
 // Print the winner of the election, if there is one
 bool print_winner(void)
 {
-    // TODO
+    // add up total votes
+    int total_votes = 0; 
+    int half_vote;
+
+    for(int i = 0; i < candidate_count; i++)
+    // add up all the votes
+    {
+        total_votes = total_votes + candidates[i].votes;
+    }
+
+    half_vote = total_votes / 2;    // after votes are added up, get int which is half of total votes
+
+    for(int i = 0; i < candidate_count; i++)
+    // if any candidate has more than half the votes, they win
+    {
+        if (candidates[i].votes > half_vote)
+        {
+            printf("%s wins!\n", candidates[i].name);
+            return true;
+        }
+    }
+    // otherwise there is no winner
+    printf("there is no winner\n");
     return false;
 }
 

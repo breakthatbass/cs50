@@ -131,26 +131,34 @@ bool vote(int voter, int rank, string name)
     // if name is a match for the name of a valid candidate,
     // update the global preferences array to indicate that the voter 
     // voter has that candidate as their rank preference
-    // (where 0 is the first preference, 1 is the second preference, etc.).
     for (int i = 0; i < candidate_count; i++)
     {
         if (strcmp(candidates[i].name, name) == 0)
         {
-                preferences[voter][rank] = i;
-                printf("%s is ranked %d\n", name, preferences[voter][rank]);
+            preferences[voter][rank] = i;
             return true;
         }     
     }
-
-
     return false;
 }
 
 // Tabulate votes for non-eliminated candidates
 void tabulate(void)
 {
-    // TODO
-    return;
+    int count = 0;
+    for(int i = 0; i < voter_count; i++)
+    {
+        int voters_choice = preferences[i][count];
+
+        // go through voters perferences until a candidate who isn't eliminated is found
+        while (candidates[voters_choice].eliminated)
+        {
+            count++;
+        }
+        candidates[voters_choice].votes++;
+        count = 0;
+    }
+    printf("%s has %i votes\n", candidates[0].name, candidates[0].votes);
 }
 
 // Print the winner of the election, if there is one

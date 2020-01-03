@@ -16,6 +16,7 @@ int main(void)
     // easier to work with
     int change = (int) round(amount * 100); 
     // get the amount of quarters
+    
     while (change >= 25) { 
         change -= 25;
         coins++;
@@ -34,7 +35,8 @@ int main(void)
     while (change >= 1) { 
         change -= 1;
         coins++;
-    } 
+    }
+    
     // print the amount of coins it took to creat the change
     printf("%i\n", coins); 
 }

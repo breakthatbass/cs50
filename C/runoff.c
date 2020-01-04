@@ -129,7 +129,7 @@ int main(int argc, string argv[])
 bool vote(int voter, int rank, string name)
 {
     // if name is a match for the name of a valid candidate,
-    // update the global preferences array to indicate that the voter 
+    // update the global preferences array to indicate that the voter
     // voter has that candidate as their rank preference
     for (int i = 0; i < candidate_count; i++)
     {
@@ -137,7 +137,7 @@ bool vote(int voter, int rank, string name)
         {
             preferences[voter][rank] = i;
             return true;
-        }     
+        }
     }
     return false;
 }
@@ -146,7 +146,7 @@ bool vote(int voter, int rank, string name)
 void tabulate(void)
 {
     int count = 0;
-    for(int i = 0; i < voter_count; i++)
+    for (int i = 0; i < voter_count; i++)
     {
         int voters_choice = preferences[i][count];
         while (candidates[voters_choice].eliminated)
@@ -166,16 +166,16 @@ bool print_winner(void)
     int total_votes = 0;
     int half_vote;
 
-    for(int i = 0; i < candidate_count; i++)
-    // add up all the votes
+    for (int i = 0; i < candidate_count; i++)
+        // add up all the votes
     {
         total_votes = total_votes + candidates[i].votes;
     }
 
     half_vote = total_votes / 2;    // after votes are added up, get int which is half of total votes
 
-    for(int i = 0; i < candidate_count; i++)
-    // if any candidate has more than half the votes, they win
+    for (int i = 0; i < candidate_count; i++)
+        // if any candidate has more than half the votes, they win
     {
         if (candidates[i].votes > half_vote)
         {
@@ -191,7 +191,7 @@ bool print_winner(void)
 int find_min(void)
 {
     int min = candidates[0].votes;
-    for(int i = 1; i < candidate_count; i++)
+    for (int i = 1; i < candidate_count; i++)
     {
         if (min >= candidates[i].votes && candidates[i].eliminated == false)
         {
@@ -208,40 +208,40 @@ bool is_tie(int min)
     int remaining[candidate_count];
     int compare = remaining[0];
     int count = 0;
-    int arr_size = sizeof(remaining)/sizeof(remaining[0]);
+    int arr_size = sizeof(remaining) / sizeof(remaining[0]);
 
-   for(int i =0; i < candidate_count; i++)
-   {
-       if (!candidates[i].eliminated)
-       {
-           remaining[count] = candidates[i].votes;
-           count++;
-       }
-   }
+    for (int i = 0; i < candidate_count; i++)
+    {
+        if (!candidates[i].eliminated)
+        {
+            remaining[count] = candidates[i].votes;
+            count++;
+        }
+    }
 
-   count = 0;
+    count = 0;
 
-   for(int i = 1; i < arr_size; i++)
-   {
-       if (compare == remaining[i])
-       {
-           count++;
-       }
-   }
-   if (count == arr_size)
-   {
-       return true;
-   }
-   else
-   {
-       return false;
-   }
+    for (int i = 1; i < arr_size; i++)
+    {
+        if (compare == remaining[i])
+        {
+            count++;
+        }
+    }
+    if (count == arr_size)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 // Eliminate the candidate (or candidiates) in last place
 void eliminate(int min)
 {
-    for(int i = 0; i < candidate_count; i++)
+    for (int i = 0; i < candidate_count; i++)
     {
         if (candidates[i].votes == min)
         {

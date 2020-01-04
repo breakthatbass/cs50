@@ -149,10 +149,9 @@ void tabulate(void)
     for(int i = 0; i < voter_count; i++)
     {
         int voters_choice = preferences[i][count];
-
-        // go through voters perferences until a candidate who isn't eliminated is found
         while (candidates[voters_choice].eliminated)
         {
+            candidates[voters_choice].votes = 0;
             count++;
         }
         candidates[voters_choice].votes++;
@@ -164,7 +163,7 @@ void tabulate(void)
 bool print_winner(void)
 {
     // add up total votes
-    int total_votes = 0; 
+    int total_votes = 0;
     int half_vote;
 
     for(int i = 0; i < candidate_count; i++)
@@ -180,7 +179,7 @@ bool print_winner(void)
     {
         if (candidates[i].votes > half_vote)
         {
-            printf("%s wins!\n", candidates[i].name);
+            printf("%s\n", candidates[i].name);
             return true;
         }
     }
@@ -191,14 +190,12 @@ bool print_winner(void)
 // Return the minimum number of votes any remaining candidate has
 int find_min(void)
 {
-    // find lowest votes of elimimnated == true ncandidates
     int min = candidates[0].votes;
-    for(int i = 0; i < candidate_count; i++)
+    for(int i = 1; i < candidate_count; i++)
     {
-        if (min > candidates[i].votes)
+        if (min >= candidates[i].votes && candidates[i].eliminated == false)
         {
             min = candidates[i].votes;
-            //printf("%s eliminated status is set to %i \nwith %i votes and min = %i\n", candidates[i].name, candidates[i].eliminated, candidates[i].votes, min);
         }
     }
     return min;
@@ -207,28 +204,38 @@ int find_min(void)
 // Return true if the election is tied between all candidates, false otherwise
 bool is_tie(int min)
 {
-    int check_votes[candidate_count];
-    for(int i = 0; i < candidate_count; i++)
-    {
-        if (candidates[i].eliminated)
-        {
-            check_votes[i] = candidates[i].votes;
-        }
-    }
-    int votes_size = sizeof(check_votes) / sizeof(check_votes[0]);
-    // loop through votes array and if they are all indentical, return true
-    for(int i = 0; i < votes_size; i++)
-    {
-        if (check_votes[0] != check_votes[i])
-        {
-           break;
-        }
-        else
-        {
-            return true;
-        }
-    }
-    return false;
+
+    int remaining[candidate_count];
+    int compare = remaining[0];
+    int count = 0;
+    int arr_size = sizeof(remaining)/sizeof(remaining[0]);
+
+   for(int i =0; i < candidate_count; i++)
+   {
+       if (!candidates[i].eliminated)
+       {
+           remaining[count] = candidates[i].votes;
+           count++;
+       }
+   }
+
+   count = 0;
+
+   for(int i = 1; i < arr_size; i++)
+   {
+       if (compare == remaining[i])
+       {
+           count++;
+       }
+   }
+   if (count == arr_size)
+   {
+       return true;
+   }
+   else
+   {
+       return false;
+   }
 }
 
 // Eliminate the candidate (or candidiates) in last place

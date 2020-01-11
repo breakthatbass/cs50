@@ -10,3 +10,6 @@ python-cs50
 __pycache__/
 *.py[cod]
 *$py.class
+
+# ignore this weird thing
+filter.dSYM

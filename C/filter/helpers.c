@@ -34,55 +34,18 @@ int main (void)
         {
             for (int j = 0; j < width; j++)
             {
-                int red = round((image[i][j].rgbtRed * 0.393) + (image[i][j].rgbtGreen * 0.769) + (image[i][j].rgbtBlue * 0.189));
-                int green = round((image[i][j].rgbtRed * 0.349) + (image[i][j].rgbtGreen * 0.686) + (image[i][j].rgbtBlue * 0.168));
-                int blue = round((image[i][j].rgbtRed * 0.272) + (image[i][j].rgbtGreen * 0.534) + (image[i][j].rgbtBlue * 0.232));
+                // make the calculations and if the ints go above 255, cap them at 255;
+                int rounded_red = round((image[i][j].rgbtRed * 0.393) + (image[i][j].rgbtGreen * 0.769) + (image[i][j].rgbtBlue * 0.189));
+                int red = fmin(255, rounded_red);
+                int rounded_green = round((image[i][j].rgbtRed * 0.349) + (image[i][j].rgbtGreen * 0.686) + (image[i][j].rgbtBlue * 0.168));
+                int green = fmin(255, rounded_green);
+                int rounded_blue = round((image[i][j].rgbtRed * 0.272) + (image[i][j].rgbtGreen * 0.534) + (image[i][j].rgbtBlue * 0.232));
+                int blue = fmin(255, rounded_green);
 
-                // check to see if the values are between 0 and 255
-                // red
-                if (red > 255)
-                {
-                    image[i][j].rgbtRed = 255;
-                }
-                else if (red < 0)
-                {
-                    image[i][j].rgbtRed = 0;
-                }
-                else
-                {
-                    image[i][j].rgbtRed = red;
-                }
-
-
-                // green
-                if (green > 255)
-                {
-                    image[i][j].rgbtGreen = 255;
-                }
-                else if (green < 0)
-                {
-                    image[i][j].rgbtGreen = 0;
-                }
-                else
-                {
-                    image[i][j].rgbtGreen = green;
-                }
-
-
-                // blue
-                if (blue > 255)
-                {
-                    image[i][j].rgbtBlue = 255;
-                }
-                else if (blue < 0)
-                {
-                    image[i][j].rgbtBlue = 0;
-                }
-                else
-                {
-                    image[i][j].rgbtBlue = blue;
-                }
-
+                // assign pixels
+                image[i][j].rgbtRed = red;
+                image[i][j].rgbtGreen = green;
+                image[i][j].rgbtBlue = blue;
             }
         }
     }

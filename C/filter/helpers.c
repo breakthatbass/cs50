@@ -39,8 +39,8 @@ int main (void)
                 int red = fmin(255, rounded_red);
                 int rounded_green = round((image[i][j].rgbtRed * 0.349) + (image[i][j].rgbtGreen * 0.686) + (image[i][j].rgbtBlue * 0.168));
                 int green = fmin(255, rounded_green);
-                int rounded_blue = round((image[i][j].rgbtRed * 0.272) + (image[i][j].rgbtGreen * 0.534) + (image[i][j].rgbtBlue * 0.232));
-                int blue = fmin(255, rounded_green);
+                int rounded_blue = round((image[i][j].rgbtRed * 0.272) + (image[i][j].rgbtGreen * 0.534) + (image[i][j].rgbtBlue * 0.131));
+                int blue = fmin(255, rounded_blue);
 
                 // assign pixels
                 image[i][j].rgbtRed = red;

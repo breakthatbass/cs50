@@ -3,13 +3,15 @@
 
 void grayscale(int height, int width, RGBTRIPLE image[height][width]);
 
-// Convert image to grayscale
+
+
 int main (void)
 {
-
+    // this file wouldn't compile without the main function...even an empty one!
     
 }
 
+    // Convert image to grayscale
     void grayscale(int height, int width, RGBTRIPLE image[height][width])
     {
 

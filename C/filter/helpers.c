@@ -73,13 +73,9 @@ int main (void)
         // loop through each pixel
         for (int i = 0; i < height; i++)
         {
-            count = 0;
             for (int j = 0; j < half_width; j++)
             {
-                int temp = image[i][*j];
-                image[i][*j] = image[i][*width - count];
-                image[i][*width - count] = temp;
-                count++;
+                image[i][j] = image[i][width - 1 - j];
             }
         }
     }

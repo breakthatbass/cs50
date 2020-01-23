@@ -8,6 +8,8 @@ def main():
     # get positive float from user
     i = get_pos_float("Change Owed: ")
 
+    
+
     # change the float to a whole number
     change = i * 100
 

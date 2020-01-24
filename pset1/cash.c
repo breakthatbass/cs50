@@ -17,6 +17,8 @@ int main(void)
     int change = (int) round(amount * 100); 
     // get the amount of quarters
     
+
+    // TODO - come back to this...seems inefficient
     while (change >= 25) { 
         change -= 25;
         coins++;

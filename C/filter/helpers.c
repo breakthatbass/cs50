@@ -69,13 +69,16 @@ int main (void)
         {
             half_width = width / 2 - (width % 2);
         }
+
         
         // loop through each pixel
         for (int i = 0; i < height; i++)
         {
             for (int j = 0; j < half_width; j++)
             {
+                RGBTRIPLE temp = image[i][j];
                 image[i][j] = image[i][width - 1 - j];
+                image[i][width - 1 - j] = temp;
             }
         }
     }

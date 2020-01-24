@@ -2,7 +2,7 @@
 #include <math.h>
 #include <stdio.h>
 
-/*
+
 // prototypes...
 void grayscale(int height, int width, RGBTRIPLE image[height][width]);
 void sepia(int height, int width, RGBTRIPLE image[height][width]);
@@ -13,7 +13,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width]);
 int main (void)
 {
     // this file wouldn't compile without the main function...even an empty one!  
-} */
+} 
     // Convert image to grayscale
     void grayscale(int height, int width, RGBTRIPLE image[height][width])
     {
@@ -56,20 +56,8 @@ int main (void)
     // Reflect image horizontally
     void reflect(int height, int width, RGBTRIPLE image[height][width])
     {
-
-        int count = 0;
-        printf("the width is %i\n", width);
         // get the half of width int
-        int half_width;
-        if (width % 2 == 0)
-        {
-            half_width = width / 2;
-        }
-        else
-        {
-            half_width = width / 2 - (width % 2);
-        }
-
+        int half_width = width / 2;
         
         // loop through each pixel
         for (int i = 0; i < height; i++)

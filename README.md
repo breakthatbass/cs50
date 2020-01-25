@@ -103,6 +103,16 @@ $ ./filter -r infile.bmp outfile.bmp
 $ ./filter -b infile.bmp outfile.bmp
 ```
 
+```recover.c``` - TODO
+
+## Week 5: Data Structures (C)
+TODO
+
+## Week 6: Python 🐍
+[```mario.py```](https://github.com/breakthatbass/cs50/blob/master/pset6/mario.py), [```cash.py```](https://github.com/breakthatbass/cs50/blob/master/pset6/cash.py), [```caesar.py```](https://github.com/breakthatbass/cs50/blob/master/pset6/caesar.py) are Python versions of weeks one and two C programs.
+
+
+
 
 
 

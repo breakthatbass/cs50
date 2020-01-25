@@ -8,7 +8,7 @@ The course lectures and problem sets are available [here](https://cs50.harvard.e
 [```mario.c```](https://github.com/breakthatbass/cs50/blob/master/pset1/mario.c) is a program that creates pyramids out of hashes based on the number the user inputs.
 
 #### Usage:
-```
+```c
 $ ./mario
 Height: 8
        #  #
@@ -23,7 +23,7 @@ Height: 8
 
 [```cash.c```](https://github.com/breakthatbass/cs50/blob/master/pset1/cash.c) is a greedy algorithm program that determines the amount of coins needed to create change. 
 
-```
+```c
 $ ./cash
 Change owed: 0.41
 4
@@ -31,7 +31,7 @@ Change owed: 0.41
 ## Week 2: Arrays (C)
 [```caesar.c```](https://github.com/breakthatbass/cs50/blob/master/pset2/caesar.c) takes a number as an argument when running the program, prompts for a string, then adds the argument number to each letter in the string (based on its ASCII number) and returns it.
 
-```
+```c
 $ ./caesar 13
 plaintext:  HELLO
 ciphertext: URYYB
@@ -39,7 +39,7 @@ ciphertext: URYYB
 
 [```vigenere.c```](https://github.com/breakthatbass/cs50/blob/master/pset2/vigenere.c)
 
-```
+```c
 $ ./vigenere ABC
 plaintext:  HELLO
 ciphertext: HFNLP
@@ -48,7 +48,7 @@ ciphertext: HFNLP
 ## Week 3: Algorithms (C)
 [```plurality.c```](https://github.com/breakthatbass/cs50/blob/master/pset3/plurality.c)
 
-```
+```c
 $ ./plurality Alice Bob Charlie
 Number of voters: 4
 Vote: Alice
@@ -60,7 +60,7 @@ Alice
 
 [```runoff.c```](https://github.com/breakthatbass/cs50/blob/master/pset3/runoff.c)
 
-```
+```c
 ./runoff Alice Bob Charlie
 Number of voters: 5
 Rank 1: Alice
@@ -90,16 +90,16 @@ Alice
 [```filter.c```](https://github.com/breakthatbass/cs50/tree/master/pset4/filter) is software for applying filters to images. It provides grayscale, sepia, reverse, and blur filters which are all written in the [```helpers.c```](https://github.com/breakthatbass/cs50/blob/master/pset4/filter/helpers.c).
 
 #### Usage:
-```
+```c
 $ ./filter -g infile.bmp outfile.bmp
 ```
-```
+```c
 $ ./filter -s infile.bmp outfile.bmp
 ```
-```
+```c
 $ ./filter -r infile.bmp outfile.bmp
 ```
-```
+```c
 $ ./filter -b infile.bmp outfile.bmp
 ```
 

@@ -57,6 +57,7 @@ int main (void)
     void reflect(int height, int width, RGBTRIPLE image[height][width])
     {
         // get the half of width int
+        // and yes, this works with odd numbers
         int half_width = width / 2;
         
         // loop through each pixel

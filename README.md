@@ -163,7 +163,8 @@ $ flask run
 [```Finance```](https://github.com/breakthatbass/cs50/tree/master/pset7/finance) is a Flask app connected to a SQLite database and stock API that allows a user to create a username and password and buy and sell stocks with fake money.
 
 ### Usage:
-Download Finance folder and run on a local Flask server
+Download Finance folder and run on a local Flask server.
+
 Get an API key from [IEX](https://iexcloud.io/)
 
 ```

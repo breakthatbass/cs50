@@ -5,7 +5,7 @@ The course lectures and problem sets are available [here](https://cs50.harvard.e
 
 ## [Week 1: C](https://github.com/breakthatbass/cs50/tree/master/pset1)
 
-```mario.c``` is a program that creates pyramids out of hashes based on the number the user inputs.
+[```mario.c```](https://github.com/breakthatbass/cs50/blob/master/pset1/mario.c) is a program that creates pyramids out of hashes based on the number the user inputs.
 
 ```
 $ ./mario
@@ -20,7 +20,7 @@ Height: 8
 ########  ########
 ```
 
-```cash.c``` is a greedy algorithm program that, when given a dollar and change amount, tells you the amount of coins needed to meet that amount. It uses the largest coins in order to use the least amount of coins. 
+```cash.c``` is a greedy algorithm program that determines the amount of coins needed to create change. 
 
 ```
 $ ./cash

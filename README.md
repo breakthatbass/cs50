@@ -3,7 +3,7 @@
 My solutions to the problem sets to the CS50 Harvard Course.
 The course lectures and problem sets are available [here](https://cs50.harvard.edu/college/2019/fall/).
 
-## Week 1: C
+## [Week 1: C](https://github.com/breakthatbass/cs50/tree/master/pset1)
 
 ```mario.c``` is a program that creates pyramids out of hashes based on the number the user inputs.
 

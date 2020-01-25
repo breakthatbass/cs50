@@ -116,25 +116,25 @@ TODO
 ### Usage:
 
 ```
-python bleep.py
-message: what the fiddlesticks
-what the ************
+$ python bleep.py
+$ message: what the fiddlesticks
+$ what the ************
 ```
 
 [Similarities](https://github.com/breakthatbass/cs50/tree/master/pset6/similarities) is a program that takes two files as inputs and determines what characters, words, or lines each file has in common.
 
 ### Usage:
 ```
-./compare --lines FILE1 FILE2
+$ ./compare --lines FILE1 FILE2
 ```
 ```
-./compare --sentences FILE1 FILE2
+$ ./compare --sentences FILE1 FILE2
 ```
 ```
-./compare --substrings 1 FILE1 FILE2
+$ ./compare --substrings 1 FILE1 FILE2
 ```
 ```
-./compare --substrings 2 FILE1 FILE2
+$ ./compare --substrings 2 FILE1 FILE2
 ```
 
 Or for usage in the web app form using a local Flask server, download the files in the Similarities folder and
@@ -144,7 +144,7 @@ $ export FLASK_APP=application.py
 ```
 then 
 ```
-flask run
+$ flask run
 ```
 
 ## Week 7: Flask & SQL
@@ -157,23 +157,23 @@ Download Survey folder and run on a local Flask server
 $ export FLASK_APP=application.py
 ```
 ```
-flask run
+$ flask run
 ```
 
 [```Finance```](https://github.com/breakthatbass/cs50/tree/master/pset7/finance) is a Flask app connected to a SQLite database and stock API that allows a user to create a username and password and buy and sell stocks with fake money.
 
 ### Usage:
 Download Finance folder and run on a local Flask server
-Get an API key from IEX
+Get an API key from [IEX](https://iexcloud.io/)
 
 ```
-export API_KEY=<insert api key>
+$ export API_KEY=<insert api key>
 ```
 ```
-export FLASK_APP=application.py
+$ export FLASK_APP=application.py
 ```
 ```
-flask run
+$ flask run
 ```
 ### TODO
-Host on Horoku
+Host Finance on Heroku

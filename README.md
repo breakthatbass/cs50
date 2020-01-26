@@ -160,6 +160,8 @@ $ export FLASK_APP=application.py
 $ flask run
 ```
 
+---
+
 [```Finance```](https://github.com/breakthatbass/cs50/tree/master/pset7/finance) is a Flask app connected to a SQLite database and stock API that allows a user to create a username and password and buy and sell stocks with fake money.
 
 ### Usage:

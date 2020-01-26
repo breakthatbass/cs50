@@ -20,6 +20,7 @@ Height: 8
  #######  #######
 ########  ########
 ```
+---
 
 [```cash.c```](https://github.com/breakthatbass/cs50/blob/master/pset1/cash.c) is a greedy algorithm program that determines the amount of coins needed to create change. 
 
@@ -36,6 +37,7 @@ $ ./caesar 13
 plaintext:  HELLO
 ciphertext: URYYB
 ```
+---
 
 [```vigenere.c```](https://github.com/breakthatbass/cs50/blob/master/pset2/vigenere.c)
 
@@ -57,6 +59,8 @@ Vote: Charlie
 Vote: Alice
 Alice
 ```
+
+---
 
 [```runoff.c```](https://github.com/breakthatbass/cs50/blob/master/pset3/runoff.c)
 
@@ -102,6 +106,7 @@ $ ./filter -r infile.bmp outfile.bmp
 ```
 $ ./filter -b infile.bmp outfile.bmp
 ```
+---
 
 ```recover.c``` - TODO
 
@@ -110,6 +115,8 @@ TODO
 
 ## Week 6: Python 🐍
 [```mario.py```](https://github.com/breakthatbass/cs50/blob/master/pset6/mario.py), [```cash.py```](https://github.com/breakthatbass/cs50/blob/master/pset6/cash.py), [```caesar.py```](https://github.com/breakthatbass/cs50/blob/master/pset6/caesar.py) are Python versions of weeks one and two C programs.
+
+---
 
 [```bleep.py```](https://github.com/breakthatbass/cs50/tree/master/pset6/bleep) is a program that takes a sentence (array of strings) as input and checks whether any of the words match any of the words in the banned.txt file and returns the sentence with those words "bleeped" out with "*" characters.
 
@@ -120,6 +127,8 @@ $ python bleep.py
 $ message: what the fiddlesticks
 $ what the ************
 ```
+
+---
 
 [Similarities](https://github.com/breakthatbass/cs50/tree/master/pset6/similarities) is a program that takes two files as inputs and determines what characters, words, or lines each file has in common.
 

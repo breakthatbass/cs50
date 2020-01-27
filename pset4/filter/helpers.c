@@ -75,5 +75,35 @@ int main (void)
     // Blur image
     void blur(int height, int width, RGBTRIPLE image[height][width])
     {
-    return;
+        // variables to hold averages of RGB value of ach pixel
+        int red_avg;
+        int green_avg;
+        int blue_avg;
+
+        for (int i = 0; i < height; i++)
+        {
+            for (int j = 0; j < width; j++)
+            {
+                // loops to get values from surrounding pixels
+                for (int k = 0; k < 3; k++)
+                {
+                    for (int l = 0; l < 3; l++)
+                    {
+                        red_avg += image[i - 1 + k][j - 1 + l].rgbtRed;
+                        green_avg += image[i - 1 + k][j - 1 + l].rgbtGreen;
+                        blue_avg += image[i - 1 + k][j - 1 + l].rgbtBlue;
+                    }
+                }
+                // average rgb values
+                red_avg = red_avg / 9;
+                green_avg = green_avg / 9;
+                blue_avg - blue_avg / 9;
+
+                // set pixels to new values
+                image[i][j].rgbtRed = red_avg;
+                image[i][j].rgbtGreen = green_avg;
+                image[i][j].rgbtBlue = blue_avg;
+            }
+        }
+
     }

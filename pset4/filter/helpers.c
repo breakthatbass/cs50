@@ -2,7 +2,7 @@
 #include <math.h>
 #include <stdio.h>
 
-
+/*
 // prototypes...
 void grayscale(int height, int width, RGBTRIPLE image[height][width]);
 void sepia(int height, int width, RGBTRIPLE image[height][width]);
@@ -13,7 +13,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width]);
 int main (void)
 {
     // this file wouldn't compile without the main function...even an empty one!  
-} 
+}  */
     // Convert image to grayscale
     void grayscale(int height, int width, RGBTRIPLE image[height][width])
     {
@@ -75,6 +75,9 @@ int main (void)
     // Blur image
     void blur(int height, int width, RGBTRIPLE image[height][width])
     {
+
+        // TODO -> conditional statements for edge cases
+
         // variables to hold averages of RGB value of ach pixel
         int red_avg;
         int green_avg;
@@ -84,6 +87,7 @@ int main (void)
         {
             for (int j = 0; j < width; j++)
             {
+
                 // loops to get values from surrounding pixels
                 for (int k = 0; k < 3; k++)
                 {
@@ -94,10 +98,12 @@ int main (void)
                         blue_avg += image[i - 1 + k][j - 1 + l].rgbtBlue;
                     }
                 }
+
+
                 // average rgb values
                 red_avg = red_avg / 9;
                 green_avg = green_avg / 9;
-                blue_avg - blue_avg / 9;
+                blue_avg = blue_avg / 9;
 
                 // set pixels to new values
                 image[i][j].rgbtRed = red_avg;

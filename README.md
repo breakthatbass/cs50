@@ -108,7 +108,13 @@ $ ./filter -b infile.bmp outfile.bmp
 ```
 ---
 
-```recover.c``` - TODO
+[```recover.c```](https://github.com/breakthatbass/cs50/tree/master/pset4/recover) is a program that recovers deleted JPEGS off of a (simulated) memory card from a camera. 
+It loops through the memory card to detect the first three bytes of JPEGs (0xff, 0xd8 and 0xff) and writes the rest of the bytes to a file. Running the program will produce all the deleted pictures from the card.
+
+#### Usage:
+```
+./recover file
+```
 
 ## Week 5: Data Structures (C)
 TODO

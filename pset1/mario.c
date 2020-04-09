@@ -33,12 +33,6 @@ int main(void)
         {
             printf("#");
         }
-/*
-        for(int j = 0; j < num - i - 1; j++)
-        {
-            printf(" ");
-        }
-        */
         // then go to the next line and repeat
          printf("\n");
     }

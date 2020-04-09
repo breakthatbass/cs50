@@ -6,7 +6,7 @@ int main(void)
 {
     float amount;
     int coins = 0; //variable to keep track of each coin used
-    
+
     // make sure the input is a float
      do {
         amount = get_float("Change owed: "); // get the amount of change
@@ -14,31 +14,15 @@ int main(void)
 
     // convert the float input to an whole number integers
     // easier to work with
-    int change = (int) round(amount * 100); 
+    int change = (int) round(amount * 100);
     // get the amount of quarters
-    
+    int quarters = change / 25;
+    int dimes = (change % 25) / 10;
+    int nickels = ((change % 25) % 10) / 5;
+    int pennies = ((change % 25) % 10) % 5;
 
-    // TODO - come back to this...seems inefficient
-    while (change >= 25) { 
-        change -= 25;
-        coins++;
-    }
-    // get the amount of dimes
-    while (change >= 10) { 
-        change -= 10;
-        coins++;
-    } 
-    // nickels...
-    while (change >= 5) {
-        change -= 5;
-        coins++;
-    } 
-    // and pennies...
-    while (change >= 1) { 
-        change -= 1;
-        coins++;
-    }
-    
-    // print the amount of coins it took to creat the change
-    printf("%i\n", coins); 
+    int change_owed = quarters + dimes + nickels + pennies;
+
+    printf("%i\n", change_owed);
+
 }

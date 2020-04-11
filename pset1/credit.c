@@ -4,6 +4,15 @@
 
 int main()
 {
+   // american express length 15
+
+  // mastercard length 16
+  // visa length 13 & 16
+
+  // starts with
+  // AMEX 34 or 37
+  // mastercard 51, 52, 53, 54, or 55
+  // visa 4
 
   int i, other, leftover, count, first_num;
   long num = get_long("Number: ");
@@ -19,17 +28,6 @@ int main()
     count++;
   }
 
-  // american express length 15
-
-  // mastercard length 16
-  // visa length 13 & 16
-
-  // starts with
-  // AMEX 34 or 37
-  // mastercard 51, 52, 53, 54, or 55
-  // visa 4
-
-  // check for AMEX
 
   // Luhn's algorithm
   for (i = 1; i < count - 1; i++) {
@@ -44,12 +42,8 @@ int main()
   }
   other = other - 1; // the other int is always one too high
 
-  /* 
-   * get the first digit
-   */
 
-  //printf("count is %d and num is %d\n", count, num);
-
+  // get the first digit to check for 4
   first_num = num;
   while(first_num >= 10)
     {
@@ -59,11 +53,11 @@ int main()
   int total = leftover + other;
 
   //printf("total is %d\n", total);
-  /*
+  
   if (total % 10 != 0) {
     printf("INVALID\n");
     exit(1);
-  }*/
+  }
 
   // american express
   if (num == 34 || num == 37 && count == 15) {

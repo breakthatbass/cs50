@@ -14,58 +14,53 @@ int main()
   // mastercard 51, 52, 53, 54, or 55
   // visa 4
 
-  int i, other, leftover, count, first_num;
+  int i, other, leftover, count, first_num, sec_num;
   long num = get_long("Number: ");
   long copy = num;
   bool card = false;
 
-  other = leftover = count = first_num = 0;
-
-  // get amount of digits in number
-  // using a copy because this will make everything a zero
-  while (copy != 0) {
-    copy /= 10;
-    count++;
-  }
+  other = leftover = count = first_num = sec_num = 0;
 
 
   // Luhn's algorithm
-  for (i = 1; i < count - 1; i++) {
-    if (i % 2 != 0) {
-      leftover = leftover + (num % 10);
-    }
-    else {
-      other = other + ((num % 10) * 2);
-    }
-    num /= 10;
-    //first_num = num;
+  while (num > 0) {
+    sec_num = first_num;
+    first_num = num % 10;
+   
+   if (count % 2 == 0) {
+     other += first_num;
+     //printf("other: %d\n", other);
+   }
+   else {
+     int mult = first_num * 2;
+     leftover += (mult / 10) + (mult % 10);
+     //printf("leftover: %d\n", leftover);
+   }
+   num /= 10;
+   count++;
   }
-  other = other - 1; // the other int is always one too high
+  //other = other - 1; // the other int is always one too high
+  int total = leftover + other;
 
 
   // get the first digit to check for 4
-  first_num = num;
-  while(first_num >= 10)
-    {
-        first_num = first_num / 10;
-    }
-
-  int total = leftover + other;
+  sec_num = (first_num * 10) + sec_num; 
 
   //printf("total is %d\n", total);
   
   if (total % 10 != 0) {
     printf("INVALID\n");
-    exit(1);
+    return 0;
   }
+  
 
   // american express
-  if (num == 34 || num == 37 && count == 15) {
+  if (sec_num == 34 || sec_num == 37 && count == 15) {
     printf("AMEX\n");
     return 0;
   }
   // mastercard
-  else if (num == 51 || num == 52 || num == 53 || num == 54 || num == 55 & count == 16) {
+  else if (sec_num == 51 || sec_num == 52 || sec_num == 53 || sec_num == 54 || sec_num == 55 & count == 16) {
     printf("MASTERCARD\n");
     return 0;
   }

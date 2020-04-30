@@ -3,6 +3,8 @@
 #include <ctype.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include "dictionary.h"
 
@@ -29,6 +31,7 @@ unsigned int hash(const char *word)
 // Loads dictionary into memory, returning true if successful else false
 bool load(const char *dictionary)
 {
+    int index;
     // Initialize hash table
     for (int i = 0; i < N; i++)
     {
@@ -49,7 +52,26 @@ bool load(const char *dictionary)
     // Insert words into hash table
     while (fscanf(file, "%s", word) != EOF)
     {
-        // TODO
+      node *n = malloc(sizeof(node));
+      if (n == NULL)
+      {
+        return false;
+      }
+      strcpy(n -> word, word);
+
+      index = hash(word);
+      if (hashtable[index] == NULL)
+      {
+        hashtable[index] = n;
+        n -> next = NULL;
+      }
+      else
+      {
+        n -> next = hashtable[index];
+        hashtable[index] = n;
+      }
+
+
     }
 
     // Close dictionary

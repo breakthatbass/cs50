@@ -22,6 +22,9 @@ node;
 // Represents a hash table
 node *hashtable[N];
 
+// global var to keep track of words as they are read
+int dict_size = 0;
+
 // Hashes word to a number between 0 and 25, inclusive, based on its first letter
 unsigned int hash(const char *word)
 {
@@ -70,8 +73,7 @@ bool load(const char *dictionary)
         n -> next = hashtable[index];
         hashtable[index] = n;
       }
-
-
+      dict_size++;
     }
 
     // Close dictionary
@@ -84,20 +86,39 @@ bool load(const char *dictionary)
 // Returns number of words in dictionary if loaded else 0 if not yet loaded
 unsigned int size(void)
 {
-    // TODO
-    return 0;
+    return dict_size;
 }
 
 // Returns true if word is in dictionary else false
 bool check(const char *word)
 {
-    // TODO
+    int index = hash(word);
+    node *cursor = hashtable[index];
+
+    while (cursor != NULL)
+    {
+      if (strcasecmp(cursor->word, word) == 0) {
+        return true;
+      }
+      else {
+        cursor = cursor -> next;
+      }
+    }
     return false;
 }
 
 // Unloads dictionary from memory, returning true if successful else false
 bool unload(void)
 {
-    // TODO
-    return false;
+    for (int i = 0; i < N; i++)
+    {
+      node *cursor = hashtable[i];
+
+      while (cursor != NULL) {
+        node *tmp = cursor;
+        cursor = cursor -> next;
+        free(tmp);
+      }
+    }
+    return true;
 }

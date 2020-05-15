@@ -13,3 +13,7 @@ __pycache__/
 
 # ignore this weird thing
 filter.dSYM
+
+.DS_Store
+a.out
+test.c
